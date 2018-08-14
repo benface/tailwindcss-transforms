@@ -29,6 +29,9 @@ plugin({
   skew: {
     '5': '5deg',
   },
+  negativeSkew: {
+    '5': '5deg',
+  },
   origins: {
     't': '50% 0%',
     'r': '100% 50%',
@@ -37,9 +40,9 @@ plugin({
   },
 })({
   e: value => value,
-  addUtilities: (utilities, variants) => {
+  addUtilities: (utilities) => {
     generatedUtilities = utilities;
   },
 });
 
-console.log("generatedUtilities", generatedUtilities);
+console.log('generatedUtilities', generatedUtilities);

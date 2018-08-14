@@ -40,6 +40,9 @@ npm install tailwindcss-transforms
       skew: {
         '5': '5deg',
       },
+      negativeSkew: {
+        '5': '5deg',
+      },
       origins: {
         't': '50% 0%',
         'r': '100% 50%',
@@ -101,6 +104,14 @@ This plugin generates the following utilities:
 }
 .skew-y-[name] {
   transform: skewY([value]);
+}
+
+/* configurable with the "negativeSkew" option */
+.-skew-x-[name] {
+  transform: skewX(-[value]);
+}
+.-skew-y-[name] {
+  transform: skewY(-[value]);
 }
 
 /* configurable with the "origins" option */
