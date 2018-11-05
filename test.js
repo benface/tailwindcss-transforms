@@ -3,7 +3,7 @@ const cssMatcher = require('jest-matcher-css');
 const postcss = require('postcss');
 const tailwindcss = require('tailwindcss');
 const defaultConfig = require('tailwindcss/defaultConfig')();
-const typographyPlugin = require('./index.js');
+const transformsPlugin = require('./index.js');
 
 const disabledModules = {};
 Object.keys(defaultConfig.modules).forEach(module => {
@@ -13,7 +13,7 @@ Object.keys(defaultConfig.modules).forEach(module => {
 const generatePluginCss = (options = {}) => {
   return postcss(tailwindcss({
     modules: disabledModules,
-    plugins: [typographyPlugin(options)],
+    plugins: [transformsPlugin(options)],
   })).process('@tailwind utilities;', {
     from: undefined,
   }).then(result => {
@@ -155,7 +155,6 @@ test('all the options are working as they should', () => {
       .transform-origin-l {
         transform-origin: 0% 50%;
       }
-
     `);
   });
 });
