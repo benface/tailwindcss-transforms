@@ -9,7 +9,7 @@ npm install tailwindcss-transforms
 ## Usage
 
 ```js
-// In your Tailwind CSS config
+// tailwind.config.js
 {
   theme: {
     transform: { // defaults to this value

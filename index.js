@@ -5,6 +5,8 @@ module.exports = function(options = {}) {
     const defaultOptions = {
       '3d': false,
     };
+    options = _.merge({}, defaultOptions, options);
+    
     const defaultTransformTheme = {
       'none': 'none',
     };
@@ -51,8 +53,6 @@ module.exports = function(options = {}) {
     const defaultPerspectiveOriginVariants = ['responsive'];
     const defaultTransformStyleVariants = ['responsive'];
     const defaultBackfaceVisibilityVariants = ['responsive'];
-
-    options = _.merge({}, defaultOptions, options);
 
     const transformUtilities = _.fromPairs(
       _.map(config('theme.transform', defaultTransformTheme), (value, modifier) => {
