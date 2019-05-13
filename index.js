@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 module.exports = function(options = {}) {
-  return ({ config, e, addUtilities }) => {
+  return ({ config, e, addUtilities, variants }) => {
     const defaultOptions = {
       '3d': false,
     };
@@ -344,21 +344,21 @@ module.exports = function(options = {}) {
       },
     };
 
-    addUtilities(transformUtilities, config('variants.transform', defaultTransformVariants));
-    addUtilities(transformOriginUtilities, config('variants.transformOrigin', defaultTransformOriginVariants));
-    addUtilities(translateUtilities, config('variants.translate', defaultTranslateVariants));
-    addUtilities(negativeTranslateUtilities, config('variants.negativeTranslate', defaultNegativeTranslateVariants));
-    addUtilities(scaleUtilities, config('variants.scale', defaultScaleVariants));
-    addUtilities(negativeScaleUtilities, config('variants.negativeScale', defaultNegativeScaleVariants));
-    addUtilities(rotateUtilities, config('variants.rotate', defaultRotateVariants));
-    addUtilities(negativeRotateUtilities, config('variants.negativeRotate', defaultNegativeRotateVariants));
-    addUtilities(skewUtilities, config('variants.skew', defaultSkewVariants));
-    addUtilities(negativeSkewUtilities, config('variants.negativeSkew', defaultNegativeSkewVariants));
+    addUtilities(transformUtilities, variants('transform', defaultTransformVariants));
+    addUtilities(transformOriginUtilities, variants('transformOrigin', defaultTransformOriginVariants));
+    addUtilities(translateUtilities, variants('translate', defaultTranslateVariants));
+    addUtilities(negativeTranslateUtilities, variants('negativeTranslate', defaultNegativeTranslateVariants));
+    addUtilities(scaleUtilities, variants('scale', defaultScaleVariants));
+    addUtilities(negativeScaleUtilities, variants('negativeScale', defaultNegativeScaleVariants));
+    addUtilities(rotateUtilities, variants('rotate', defaultRotateVariants));
+    addUtilities(negativeRotateUtilities, variants('negativeRotate', defaultNegativeRotateVariants));
+    addUtilities(skewUtilities, variants('skew', defaultSkewVariants));
+    addUtilities(negativeSkewUtilities, variants('negativeSkew', defaultNegativeSkewVariants));
     if (options['3d']) {
-      addUtilities(perspectiveUtilities, config('variants.perspective', defaultPerspectiveVariants));
-      addUtilities(perspectiveOriginUtilities, config('variants.perspectiveOrigin', defaultPerspectiveOriginVariants));
-      addUtilities(transformStyleUtilities, config('variants.transformStyle', defaultTransformStyleVariants));
-      addUtilities(backfaceVisibilityUtilities, config('variants.backfaceVisibility', defaultBackfaceVisibilityVariants));
+      addUtilities(perspectiveUtilities, variants('perspective', defaultPerspectiveVariants));
+      addUtilities(perspectiveOriginUtilities, variants('perspectiveOrigin', defaultPerspectiveOriginVariants));
+      addUtilities(transformStyleUtilities, variants('transformStyle', defaultTransformStyleVariants));
+      addUtilities(backfaceVisibilityUtilities, variants('backfaceVisibility', defaultBackfaceVisibilityVariants));
     }
   };
 };
