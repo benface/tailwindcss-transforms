@@ -1,11 +1,15 @@
 const _ = require('lodash');
 
+const prefixNegativeModifiers = function(base, modifier) {
+  return _.startsWith(modifier, '-') ? `-${base}-${modifier.slice(1)}` : `${base}-${modifier}`;
+};
+
 module.exports = function(options = {}) {
-  return ({ config, e, addUtilities, variants }) => {
+  return ({ theme, variants, e, addUtilities }) => {
     const defaultOptions = {
       '3d': false,
     };
-    options = _.merge({}, defaultOptions, options);
+    options = _.defaults({}, options, defaultOptions);
     
     const defaultTransformTheme = {
       'none': 'none',
@@ -24,20 +28,12 @@ module.exports = function(options = {}) {
     const defaultTransformOriginVariants = ['responsive'];
     const defaultTranslateTheme = {};
     const defaultTranslateVariants = ['responsive'];
-    const defaultNegativeTranslateTheme = {};
-    const defaultNegativeTranslateVariants = ['responsive'];
     const defaultScaleTheme = {};
     const defaultScaleVariants = ['responsive'];
-    const defaultNegativeScaleTheme = {};
-    const defaultNegativeScaleVariants = ['responsive'];
     const defaultRotateTheme = {};
     const defaultRotateVariants = ['responsive'];
-    const defaultNegativeRotateTheme = {};
-    const defaultNegativeRotateVariants = ['responsive'];
     const defaultSkewTheme = {};
     const defaultSkewVariants = ['responsive'];
-    const defaultNegativeSkewTheme = {};
-    const defaultNegativeSkewVariants = ['responsive'];
     const defaultPerspectiveTheme = {};
     const defaultPerspectiveVariants = ['responsive'];
     const defaultPerspectiveOriginTheme = {
@@ -54,8 +50,27 @@ module.exports = function(options = {}) {
     const defaultTransformStyleVariants = ['responsive'];
     const defaultBackfaceVisibilityVariants = ['responsive'];
 
+    const transformTheme = theme('transform', defaultTransformTheme);
+    const transformVariants = variants('transform', defaultTransformVariants);
+    const transformOriginTheme = theme('transformOrigin', defaultTransformOriginTheme);
+    const transformOriginVariants = variants('transformOrigin', defaultTransformOriginVariants);
+    const translateTheme = theme('translate', defaultTranslateTheme);
+    const translateVariants = variants('translate', defaultTranslateVariants);
+    const scaleTheme = theme('scale', defaultScaleTheme);
+    const scaleVariants = variants('scale', defaultScaleVariants);
+    const rotateTheme = theme('rotate', defaultRotateTheme);
+    const rotateVariants = variants('rotate', defaultRotateVariants);
+    const skewTheme = theme('skew', defaultSkewTheme);
+    const skewVariants = variants('skew', defaultSkewVariants);
+    const perspectiveTheme = theme('perspective', defaultPerspectiveTheme);
+    const perspectiveVariants = variants('perspective', defaultPerspectiveVariants);
+    const perspectiveOriginTheme = theme('perspectiveOrigin', defaultPerspectiveOriginTheme);
+    const perspectiveOriginVariants = variants('perspectiveOrigin', defaultPerspectiveOriginVariants);
+    const transformStyleVariants = variants('transformStyle', defaultTransformStyleVariants);
+    const backfaceVisibilityVariants = variants('backfaceVisibility', defaultBackfaceVisibilityVariants);
+
     const transformUtilities = _.fromPairs(
-      _.map(config('theme.transform', defaultTransformTheme), (value, modifier) => {
+      _.map(transformTheme, (value, modifier) => {
         return [
           `.${e(`transform-${modifier}`)}`,
           {
@@ -66,7 +81,7 @@ module.exports = function(options = {}) {
     );
 
     const transformOriginUtilities = _.fromPairs(
-      _.map(config('theme.transformOrigin', defaultTransformOriginTheme), (value, modifier) => {
+      _.map(transformOriginTheme, (value, modifier) => {
         return [
           `.${e(`transform-${modifier}`)}`,
           {
@@ -78,23 +93,23 @@ module.exports = function(options = {}) {
 
     const translateUtilities = _.fromPairs(
       _.concat(
-        ..._.map(config('theme.translate', defaultTranslateTheme), (value, modifier) => {
+        ..._.map(translateTheme, (value, modifier) => {
           return [
             [
-              `.${e(`translate-x-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('translate-x', modifier))}`,
               {
                 transform: `translateX(${value})`,
               },
             ],
             [
-              `.${e(`translate-y-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('translate-y', modifier))}`,
               {
                 transform: `translateY(${value})`,
               },
             ],
             ...(!options['3d'] ? [] : [
               [
-                `.${e(`translate-z-${modifier}`)}`,
+                `.${e(prefixNegativeModifiers('translate-z', modifier))}`,
                 {
                   transform: `translateZ(${value})`,
                 },
@@ -105,60 +120,31 @@ module.exports = function(options = {}) {
       )
     );
 
-    const negativeTranslateUtilities = _.fromPairs(
-      _.concat(
-        ..._.map(config('theme.negativeTranslate', defaultNegativeTranslateTheme), (value, modifier) => {
-          return [
-            [
-              `.${e(`-translate-x-${modifier}`)}`,
-              {
-                transform: `translateX(-${value})`,
-              },
-            ],
-            [
-              `.${e(`-translate-y-${modifier}`)}`,
-              {
-                transform: `translateY(-${value})`,
-              },
-            ],
-            ...(!options['3d'] ? [] : [
-              [
-                `.${e(`-translate-z-${modifier}`)}`,
-                {
-                  transform: `translateZ(-${value})`,
-                },
-              ],
-            ]),
-          ];
-        })
-      )
-    );
-
     const scaleUtilities = _.fromPairs(
       _.concat(
-        ..._.map(config('theme.scale', defaultScaleTheme), (value, modifier) => {
+        ..._.map(scaleTheme, (value, modifier) => {
           return [
             [
-              `.${e(`scale-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('scale', modifier))}`,
               {
                 transform: `scale(${value})`,
               },
             ],
             [
-              `.${e(`scale-x-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('scale-x', modifier))}`,
               {
                 transform: `scaleX(${value})`,
               },
             ],
             [
-              `.${e(`scale-y-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('scale-y', modifier))}`,
               {
                 transform: `scaleY(${value})`,
               },
             ],
             ...(!options['3d'] ? [] : [
               [
-                `.${e(`scale-z-${modifier}`)}`,
+                `.${e(prefixNegativeModifiers('scale-z', modifier))}`,
                 {
                   transform: `scaleZ(${value})`,
                 },
@@ -169,60 +155,25 @@ module.exports = function(options = {}) {
       )
     );
 
-    const negativeScaleUtilities = _.fromPairs(
-      _.concat(
-        ..._.map(config('theme.scale', defaultNegativeScaleTheme), (value, modifier) => {
-          return [
-            [
-              `.${e(`-scale-${modifier}`)}`,
-              {
-                transform: `scale(-${value})`,
-              },
-            ],
-            [
-              `.${e(`-scale-x-${modifier}`)}`,
-              {
-                transform: `scaleX(-${value})`,
-              },
-            ],
-            [
-              `.${e(`-scale-y-${modifier}`)}`,
-              {
-                transform: `scaleY(-${value})`,
-              },
-            ],
-            ...(!options['3d'] ? [] : [
-              [
-                `.${e(`-scale-z-${modifier}`)}`,
-                {
-                  transform: `scaleZ(-${value})`,
-                },
-              ],
-            ]),
-          ];
-        })
-      )
-    );
-
     const rotateUtilities = _.fromPairs(
       _.concat(
-        ..._.map(config('theme.rotate', defaultRotateTheme), (value, modifier) => {
+        ..._.map(rotateTheme, (value, modifier) => {
           return [
             [
-              `.${e(`rotate-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('rotate', modifier))}`,
               {
                 transform: `rotate(${value})`,
               },
             ],
             ...(!options['3d'] ? [] : [
               [
-                `.${e(`rotate-x-${modifier}`)}`,
+                `.${e(prefixNegativeModifiers('rotate-x', modifier))}`,
                 {
                   transform: `rotateX(${value})`,
                 },
               ],
               [
-                `.${e(`rotate-y-${modifier}`)}`,
+                `.${e(prefixNegativeModifiers('rotate-y', modifier))}`,
                 {
                   transform: `rotateY(${value})`,
                 },
@@ -233,47 +184,18 @@ module.exports = function(options = {}) {
       )
     );
 
-    const negativeRotateUtilities = _.fromPairs(
-      _.concat(
-        ..._.map(config('theme.negativeRotate', defaultNegativeRotateTheme), (value, modifier) => {
-          return [
-            [
-              `.${e(`-rotate-${modifier}`)}`,
-              {
-                transform: `rotate(-${value})`,
-              },
-            ],
-            ...(!options['3d'] ? [] : [
-              [
-                `.${e(`-rotate-x-${modifier}`)}`,
-                {
-                  transform: `rotateX(-${value})`,
-                },
-              ],
-              [
-                `.${e(`-rotate-y-${modifier}`)}`,
-                {
-                  transform: `rotateY(-${value})`,
-                },
-              ],
-            ]),
-          ];
-        })
-      )
-    );
-
     const skewUtilities = _.fromPairs(
       _.concat(
-        ..._.map(config('theme.skew', defaultSkewTheme), (value, modifier) => {
+        ..._.map(skewTheme, (value, modifier) => {
           return [
             [
-              `.${e(`skew-x-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('skew-x', modifier))}`,
               {
                 transform: `skewX(${value})`,
               },
             ],
             [
-              `.${e(`skew-y-${modifier}`)}`,
+              `.${e(prefixNegativeModifiers('skew-y', modifier))}`,
               {
                 transform: `skewY(${value})`,
               },
@@ -283,29 +205,8 @@ module.exports = function(options = {}) {
       )
     );
 
-    const negativeSkewUtilities = _.fromPairs(
-      _.concat(
-        ..._.map(config('theme.negativeSkew', defaultNegativeSkewTheme), (value, modifier) => {
-          return [
-            [
-              `.${e(`-skew-x-${modifier}`)}`,
-              {
-                transform: `skewX(-${value})`,
-              },
-            ],
-            [
-              `.${e(`-skew-y-${modifier}`)}`,
-              {
-                transform: `skewY(-${value})`,
-              },
-            ],
-          ];
-        })
-      )
-    );
-
     const perspectiveUtilities = _.fromPairs(
-      _.map(config('theme.perspective', defaultPerspectiveTheme), (value, modifier) => {
+      _.map(perspectiveTheme, (value, modifier) => {
         return [
           `.${e(`perspective-${modifier}`)}`,
           {
@@ -316,7 +217,7 @@ module.exports = function(options = {}) {
     );
 
     const perspectiveOriginUtilities = _.fromPairs(
-      _.map(config('theme.perspectiveOrigin', defaultPerspectiveOriginTheme), (value, modifier) => {
+      _.map(perspectiveOriginTheme, (value, modifier) => {
         return [
           `.${e(`perspective-${modifier}`)}`,
           {
@@ -344,21 +245,17 @@ module.exports = function(options = {}) {
       },
     };
 
-    addUtilities(transformUtilities, variants('transform', defaultTransformVariants));
-    addUtilities(transformOriginUtilities, variants('transformOrigin', defaultTransformOriginVariants));
-    addUtilities(translateUtilities, variants('translate', defaultTranslateVariants));
-    addUtilities(negativeTranslateUtilities, variants('negativeTranslate', defaultNegativeTranslateVariants));
-    addUtilities(scaleUtilities, variants('scale', defaultScaleVariants));
-    addUtilities(negativeScaleUtilities, variants('negativeScale', defaultNegativeScaleVariants));
-    addUtilities(rotateUtilities, variants('rotate', defaultRotateVariants));
-    addUtilities(negativeRotateUtilities, variants('negativeRotate', defaultNegativeRotateVariants));
-    addUtilities(skewUtilities, variants('skew', defaultSkewVariants));
-    addUtilities(negativeSkewUtilities, variants('negativeSkew', defaultNegativeSkewVariants));
+    addUtilities(transformUtilities, transformVariants);
+    addUtilities(transformOriginUtilities, transformOriginVariants);
+    addUtilities(translateUtilities, translateVariants);
+    addUtilities(scaleUtilities, scaleVariants);
+    addUtilities(rotateUtilities, rotateVariants);
+    addUtilities(skewUtilities, skewVariants);
     if (options['3d']) {
-      addUtilities(perspectiveUtilities, variants('perspective', defaultPerspectiveVariants));
-      addUtilities(perspectiveOriginUtilities, variants('perspectiveOrigin', defaultPerspectiveOriginVariants));
-      addUtilities(transformStyleUtilities, variants('transformStyle', defaultTransformStyleVariants));
-      addUtilities(backfaceVisibilityUtilities, variants('backfaceVisibility', defaultBackfaceVisibilityVariants));
+      addUtilities(perspectiveUtilities, perspectiveVariants);
+      addUtilities(perspectiveOriginUtilities, perspectiveOriginVariants);
+      addUtilities(transformStyleUtilities, transformStyleVariants);
+      addUtilities(backfaceVisibilityUtilities, backfaceVisibilityVariants);
     }
   };
 };

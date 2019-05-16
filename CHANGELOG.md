@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project mostly adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0] - 2019-05-16
+
+### Removed since 2.0.0-beta.1
+- Removed the `negativeTranslate`, `negativeScale`, `negativeRotate`, and `negativeSkew` theme objects as they are not needed anymore; just like negative margins in Tailwind 1.0, if the key of a translate, scale, rotate, or skew utility starts with a minus sign (`-`), the generated class will now automatically start with a minus sign as well (e.g. `'-full': '-100%'` in `translate` will generate a `-translate-x-full` class)
 
 ### Changed since 2.0.0-beta.1
 - Added support for global variants thanks to Tailwind’s `variants()` helper function
@@ -14,7 +17,6 @@ and this project mostly adheres to [Semantic Versioning](https://semver.org/spec
 - Tailwind 1.0.0 compatibility
 - Added a `3d` option (`false` by default) to generate a bunch of new utilities (see `README` for more info)
 - Added a `transform` theme object for custom transforms (it’s also what generates the `transform-none` utility)
-- Added a `negativeScale` theme object (useful for flipping an element horizontally and/or vertically)
 - Added `perspective` and `perspectiveOrigin` theme objects (for use with the new `3d` option)
 
 ### Changed since 1.x
@@ -59,7 +61,8 @@ and this project mostly adheres to [Semantic Versioning](https://semver.org/spec
 
 Initial release
 
-[Unreleased]: https://github.com/benface/tailwindcss-transforms/compare/v2.0.0-beta.1...HEAD
+[Unreleased]: https://github.com/benface/tailwindcss-transforms/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/benface/tailwindcss-transforms/compare/v2.0.0-beta.1...v2.0.0
 [2.0.0-beta.1]: https://github.com/benface/tailwindcss-transforms/compare/v1.0.2...v2.0.0-beta.1
 [1.0.2]: https://github.com/benface/tailwindcss-transforms/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/benface/tailwindcss-transforms/compare/v1.0.0...v1.0.1

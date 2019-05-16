@@ -112,31 +112,23 @@ test('utilities can be customized', () => {
       translate: {
         '1/2': '50%',
         'full': '100%',
-      },
-      negativeTranslate: {
-        'full': '100%',
+        '-full': '-100%',
       },
       scale: {
         '90': '0.9',
         '100': '1',
         '110': '1.1',
-      },
-      negativeScale: {
-        '100': '1',
+        '-100': '-1',
       },
       rotate: {
         '90': '90deg',
         '180': '180deg',
         '270': '270deg',
-      },
-      negativeRotate: {
-        '90': '90deg',
+        '-90': '-90deg',
       },
       skew: {
         '5': '5deg',
-      },
-      negativeSkew: {
-        '10': '10deg',
+        '-5': '-5deg',
       },
       perspective: {
         'none': 'none',
@@ -149,13 +141,9 @@ test('utilities can be customized', () => {
       transform: [],
       transformOrigin: [],
       translate: [],
-      negativeTranslate: [],
       scale: [],
-      negativeScale: [],
       rotate: [],
-      negativeRotate: [],
       skew: [],
-      negativeSkew: [],
       perspective: [],
       perspectiveOrigin: [],
       transformStyle: [],
@@ -226,15 +214,6 @@ test('utilities can be customized', () => {
       .scale-y-110 {
         transform: scaleY(1.1)
       }
-      .-scale-90 {
-        transform: scale(-0.9)
-      }
-      .-scale-x-90 {
-        transform: scaleX(-0.9)
-      }
-      .-scale-y-90 {
-        transform: scaleY(-0.9)
-      }
       .-scale-100 {
         transform: scale(-1)
       }
@@ -243,15 +222,6 @@ test('utilities can be customized', () => {
       }
       .-scale-y-100 {
         transform: scaleY(-1)
-      }
-      .-scale-110 {
-        transform: scale(-1.1)
-      }
-      .-scale-x-110 {
-        transform: scaleX(-1.1)
-      }
-      .-scale-y-110 {
-        transform: scaleY(-1.1)
       }
       .rotate-90 {
         transform: rotate(90deg)
@@ -271,11 +241,11 @@ test('utilities can be customized', () => {
       .skew-y-5 {
         transform: skewY(5deg)
       }
-      .-skew-x-10 {
-        transform: skewX(-10deg)
+      .-skew-x-5 {
+        transform: skewX(-5deg)
       }
-      .-skew-y-10 {
-        transform: skewY(-10deg)
+      .-skew-y-5 {
+        transform: skewY(-5deg)
       }
     `);
   });
@@ -292,27 +262,19 @@ test('3d utilities can be generated', () => {
       },
       translate: {
         'full': '100%',
-      },
-      negativeTranslate: {
-        'full': '100%',
+        '-full': '-100%',
       },
       scale: {
         '100': '1',
-      },
-      negativeScale: {
-        '100': '1',
+        '-100': '-1',
       },
       rotate: {
         '90': '90deg',
-      },
-      negativeRotate: {
-        '90': '90deg',
+        '-90': '-90deg',
       },
       skew: {
         '5': '5deg',
-      },
-      negativeSkew: {
-        '10': '10deg',
+        '-5': '-5deg',
       },
       perspective: {
         'none': 'none',
@@ -325,13 +287,9 @@ test('3d utilities can be generated', () => {
       transform: [],
       transformOrigin: [],
       translate: [],
-      negativeTranslate: [],
       scale: [],
-      negativeScale: [],
       rotate: [],
-      negativeRotate: [],
       skew: [],
-      negativeSkew: [],
       perspective: [],
       perspectiveOrigin: [],
       transformStyle: [],
@@ -413,11 +371,11 @@ test('3d utilities can be generated', () => {
       .skew-y-5 {
         transform: skewY(5deg)
       }
-      .-skew-x-10 {
-        transform: skewX(-10deg)
+      .-skew-x-5 {
+        transform: skewX(-5deg)
       }
-      .-skew-y-10 {
-        transform: skewY(-10deg)
+      .-skew-y-5 {
+        transform: skewY(-5deg)
       }
       .perspective-none {
         perspective: none
@@ -453,22 +411,12 @@ test('variants can be customized', () => {
       translate: {
         'full': '100%',
       },
-      negativeTranslate: {
-        'full': '100%',
-      },
       scale: {},
-      negativeScale: {},
       rotate: {
-        '90': '90deg',
-      },
-      negativeRotate: {
         '90': '90deg',
       },
       skew: {
         '5': '5deg',
-      },
-      negativeSkew: {
-        '10': '10deg',
       },
       perspective: {
         'none': 'none',
@@ -481,13 +429,9 @@ test('variants can be customized', () => {
       transform: ['hover', 'active', 'group-hover'],
       transformOrigin: ['hover'],
       translate: ['active'],
-      negativeTranslate: ['responsive'],
       scale: [],
-      negativeScale: [],
       rotate: ['group-hover'],
-      negativeRotate: ['active'],
       skew: [],
-      negativeSkew: ['responsive'],
       perspective: ['hover'],
       perspectiveOrigin: ['hover', 'active'],
       transformStyle: ['hover'],
@@ -525,49 +469,17 @@ test('variants can be customized', () => {
       .active\\:translate-y-full:active {
         transform: translateY(100%)
       }
-      .-translate-x-full {
-        transform: translateX(-100%)
-      }
-      .-translate-y-full {
-        transform: translateY(-100%)
-      }
       .rotate-90 {
         transform: rotate(90deg)
       }
       .group:hover .group-hover\\:rotate-90 {
         transform: rotate(90deg)
       }
-      .-rotate-90 {
-        transform: rotate(-90deg)
-      }
-      .active\\:-rotate-90:active {
-        transform: rotate(-90deg)
-      }
       .skew-x-5 {
         transform: skewX(5deg)
       }
       .skew-y-5 {
         transform: skewY(5deg)
-      }
-      .-skew-x-10 {
-        transform: skewX(-10deg)
-      }
-      .-skew-y-10 {
-        transform: skewY(-10deg)
-      }
-      @media (min-width: 640px) {
-        .sm\\:-translate-x-full {
-          transform: translateX(-100%)
-        }
-        .sm\\:-translate-y-full {
-          transform: translateY(-100%)
-        }
-        .sm\\:-skew-x-10 {
-          transform: skewX(-10deg)
-        }
-        .sm\\:-skew-y-10 {
-          transform: skewY(-10deg)
-        }
       }
     `);
   });

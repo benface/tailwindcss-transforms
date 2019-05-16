@@ -29,32 +29,19 @@ npm install tailwindcss-transforms
       '1/2': '50%',
       'full': '100%',
     },
-    negativeTranslate: { // defaults to {}
-      '1/2': '50%',
-      'full': '100%',
-    },
     scale: { // defaults to {}
       '90': '0.9',
       '100': '1',
       '110': '1.1',
-    },
-    negativeScale: { // defaults to {}
-      '100': '1',
+      '-100': '-1',
     },
     rotate: { // defaults to {}
       '90': '90deg',
       '180': '180deg',
       '270': '270deg',
     },
-    negativeRotate: { // defaults to {}
-      '90': '90deg',
-      '180': '180deg',
-      '270': '270deg',
-    },
     skew: { // defaults to {}
-      '5': '5deg',
-    },
-    negativeSkew: { // defaults to {}
+      '-5': '-5deg',
       '5': '5deg',
     },
     perspective: { // defaults to {}
@@ -79,13 +66,9 @@ npm install tailwindcss-transforms
     transform: ['responsive'],
     transformOrigin: ['responsive'],
     translate: ['responsive'],
-    negativeTranslate: ['responsive'],
     scale: ['responsive'],
-    negativeScale: ['responsive'],
     rotate: ['responsive'],
-    negativeRotate: ['responsive'],
     skew: ['responsive'],
-    negativeSkew: ['responsive'],
     perspective: ['responsive'],
     perspectiveOrigin: ['responsive'],
     transformStyle: ['responsive'],
@@ -122,16 +105,15 @@ This plugin generates the following utilities:
 .translate-z-[key] { /* only if "3d" is true */
   transform: translateZ([value]);
 }
-
-/* configurable with the "negativeTranslate" theme object */
+/* or, when the key starts with a minus sign: */
 .-translate-x-[key] {
-  transform: translateX(-[value]);
+  transform: translateX([value]);
 }
 .-translate-y-[key] {
-  transform: translateY(-[value]);
+  transform: translateY([value]);
 }
 .-translate-z-[key] { /* only if "3d" is true */
-  transform: translateZ(-[value]);
+  transform: translateZ([value]);
 }
 
 /* configurable with the "scale" theme object */
@@ -147,19 +129,18 @@ This plugin generates the following utilities:
 .scale-z-[key] { /* only if "3d" is true */
   transform: scaleZ([value]);
 }
-
-/* configurable with the "negativeScale" theme object */
+/* or, when the key starts with a minus sign: */
 .-scale-[key] {
-  transform: scale(-[value]);
+  transform: scale([value]);
 }
 .-scale-x-[key] {
-  transform: scaleX(-[value]);
+  transform: scaleX([value]);
 }
 .-scale-y-[key] {
-  transform: scaleY(-[value]);
+  transform: scaleY([value]);
 }
 .-scale-z-[key] { /* only if "3d" is true */
-  transform: scaleZ(-[value]);
+  transform: scaleZ([value]);
 }
 
 /* configurable with the "rotate" theme object */
@@ -172,16 +153,15 @@ This plugin generates the following utilities:
 .rotate-y-[key] { /* only if "3d" is true */
   transform: rotateY([value]);
 }
-
-/* configurable with the "negativeRotate" theme object */
+/* or, when the key starts with a minus sign: */
 .-rotate-[key] {
-  transform: rotate(-[value]);
+  transform: rotate([value]);
 }
 .-rotate-x-[key] { /* only if "3d" is true */
-  transform: rotateX(-[value]);
+  transform: rotateX([value]);
 }
 .-rotate-y-[key] { /* only if "3d" is true */
-  transform: rotateY(-[value]);
+  transform: rotateY([value]);
 }
 
 /* configurable with the "skew" theme object */
@@ -191,13 +171,12 @@ This plugin generates the following utilities:
 .skew-y-[key] {
   transform: skewY([value]);
 }
-
-/* configurable with the "negativeSkew" theme object */
+/* or, when the key starts with a minus sign: */
 .-skew-x-[key] {
-  transform: skewX(-[value]);
+  transform: skewX([value]);
 }
 .-skew-y-[key] {
-  transform: skewY(-[value]);
+  transform: skewY([value]);
 }
 
 /* configurable with the "perspective" theme object (only if "3d" is true) */
