@@ -2,7 +2,6 @@ const _ = require('lodash');
 const cssMatcher = require('jest-matcher-css');
 const postcss = require('postcss');
 const tailwindcss = require('tailwindcss');
-const defaultConfig = require('tailwindcss/defaultConfig');
 const transformsPlugin = require('./index.js');
 
 const generatePluginCss = (config, pluginOptions = {}) => {
@@ -112,23 +111,19 @@ test('utilities can be customized', () => {
       translate: {
         '1/2': '50%',
         'full': '100%',
-        '-full': '-100%',
       },
       scale: {
         '90': '0.9',
         '100': '1',
         '110': '1.1',
-        '-100': '-1',
       },
       rotate: {
         '90': '90deg',
         '180': '180deg',
         '270': '270deg',
-        '-90': '-90deg',
       },
       skew: {
         '5': '5deg',
-        '-5': '-5deg',
       },
       perspective: {
         'none': 'none',
@@ -181,12 +176,6 @@ test('utilities can be customized', () => {
       .translate-y-full {
         transform: translateY(100%)
       }
-      .-translate-x-full {
-        transform: translateX(-100%)
-      }
-      .-translate-y-full {
-        transform: translateY(-100%)
-      }
       .scale-90 {
         transform: scale(0.9)
       }
@@ -214,6 +203,80 @@ test('utilities can be customized', () => {
       .scale-y-110 {
         transform: scaleY(1.1)
       }
+      .rotate-90 {
+        transform: rotate(90deg)
+      }
+      .rotate-180 {
+        transform: rotate(180deg)
+      }
+      .rotate-270 {
+        transform: rotate(270deg)
+      }
+      .skew-x-5 {
+        transform: skewX(5deg)
+      }
+      .skew-y-5 {
+        transform: skewY(5deg)
+      }
+    `);
+  });
+});
+
+test('negative translate, scale, rotate, and skew utilities can be generated', () => {
+  return generatePluginCss({
+    theme: {
+      transformOrigin: {},
+      translate: {
+        'full': '100%',
+        '-full': '-100%',
+      },
+      scale: {
+        '100': '1',
+        '-100': '-1',
+      },
+      rotate: {
+        '90': '90deg',
+        '-90': '-90deg',
+      },
+      skew: {
+        '5': '5deg',
+        '-5': '-5deg',
+      },
+      perspectiveOrigin: {},
+    },
+    variants: {
+      transform: [],
+      translate: [],
+      scale: [],
+      rotate: [],
+      skew: [],
+    },
+  }).then(css => {
+    expect(css).toMatchCss(`
+      .transform-none {
+        transform: none
+      }
+      .translate-x-full {
+        transform: translateX(100%)
+      }
+      .translate-y-full {
+        transform: translateY(100%)
+      }
+      .-translate-x-full {
+        transform: translateX(-100%)
+      }
+      .-translate-y-full {
+        transform: translateY(-100%)
+      }
+      .scale-100 {
+        transform: scale(1)
+      }
+      .scale-x-100 {
+        transform: scaleX(1)
+      }
+      .scale-y-100 {
+        transform: scaleY(1)
+      }
       .-scale-100 {
         transform: scale(-1)
       }
@@ -225,12 +288,6 @@ test('utilities can be customized', () => {
       }
       .rotate-90 {
         transform: rotate(90deg)
-      }
-      .rotate-180 {
-        transform: rotate(180deg)
-      }
-      .rotate-270 {
-        transform: rotate(270deg)
       }
       .-rotate-90 {
         transform: rotate(-90deg)
@@ -251,7 +308,7 @@ test('utilities can be customized', () => {
   });
 });
 
-test('3d utilities can be generated', () => {
+test('third-axis translate, scale, and rotate utilities can be generated', () => {
   return generatePluginCss({
     theme: {
       transform: {
@@ -394,6 +451,100 @@ test('3d utilities can be generated', () => {
       }
       backface-hidden {
         backface-visibility: hidden
+      }
+    `);
+  });
+});
+
+test('multi-axis translate, scale, and rotate utilities can be generated', () => {
+  return generatePluginCss({
+    theme: {
+      transformOrigin: {},
+      translate: {
+        'full': '100%',
+        '1/2': ['50%'],
+        'right-up': ['100%', '-100%'],
+        '3d': ['40px', '-60px', '-130px'],
+      },
+      scale: {
+        '100': '1',
+        '-100': ['-1'],
+        'stretched-x': ['2', '0.5'],
+        'stretched-y': ['0.5', '2'],
+        '3d': ['0.5', '1', '2'],
+      },
+      rotate: {
+        '90': '90deg',
+        '180': ['180deg'],
+        '3d': ['0', '1', '0.5', '45deg'],
+      },
+      perspectiveOrigin: {},
+    },
+    variants: {
+      transform: [],
+      translate: [],
+      scale: [],
+      rotate: [],
+      skew: [],
+    },
+  }).then(css => {
+    expect(css).toMatchCss(`
+      .transform-none {
+        transform: none
+      }
+      .translate-x-full {
+        transform: translateX(100%)
+      }
+      .translate-y-full {
+        transform: translateY(100%)
+      }
+      .translate-x-1\\/2 {
+        transform: translateX(50%)
+      }
+      .translate-y-1\\/2 {
+        transform: translateY(50%)
+      }
+      .translate-right-up {
+        transform: translate(100%, -100%)
+      }
+      .translate-3d {
+        transform: translate3d(40px, -60px, -130px)
+      }
+      .scale-100 {
+        transform: scale(1)
+      }
+      .scale-x-100 {
+        transform: scaleX(1)
+      }
+      .scale-y-100 {
+        transform: scaleY(1)
+      }
+      .-scale-100 {
+        transform: scale(-1)
+      }
+      .-scale-x-100 {
+        transform: scaleX(-1)
+      }
+      .-scale-y-100 {
+        transform: scaleY(-1)
+      }
+      .scale-stretched-x {
+        transform: scale(2, 0.5)
+      }
+      .scale-stretched-y {
+        transform: scale(0.5, 2)
+      }
+      .scale-3d {
+        transform: scale3d(0.5, 1, 2)
+      }
+      .rotate-90 {
+        transform: rotate(90deg)
+      }
+      .rotate-180 {
+        transform: rotate(180deg)
+      }
+      .rotate-3d {
+        transform: rotate3d(0, 1, 0.5, 45deg)
       }
     `);
   });

@@ -94,6 +94,32 @@ module.exports = function(options = {}) {
     const translateUtilities = _.fromPairs(
       _.concat(
         ..._.map(translateTheme, (value, modifier) => {
+          if (_.isArray(value)) {
+            if (value.length === 0) {
+              return [];
+            }
+            if (value.length >= 3) {
+              return [
+                [
+                  `.${e(prefixNegativeModifiers('translate', modifier))}`,
+                  {
+                    transform: `translate3d(${value[0]}, ${value[1]}, ${value[2]})`,
+                  },
+                ],
+              ];
+            }
+            if (value.length >= 2) {
+              return [
+                [
+                  `.${e(prefixNegativeModifiers('translate', modifier))}`,
+                  {
+                    transform: `translate(${value[0]}, ${value[1]})`,
+                  },
+                ],
+              ];
+            }
+            value = value[0];
+          }
           return [
             [
               `.${e(prefixNegativeModifiers('translate-x', modifier))}`,
@@ -123,6 +149,32 @@ module.exports = function(options = {}) {
     const scaleUtilities = _.fromPairs(
       _.concat(
         ..._.map(scaleTheme, (value, modifier) => {
+          if (_.isArray(value)) {
+            if (value.length === 0) {
+              return [];
+            }
+            if (value.length >= 3) {
+              return [
+                [
+                  `.${e(prefixNegativeModifiers('scale', modifier))}`,
+                  {
+                    transform: `scale3d(${value[0]}, ${value[1]}, ${value[2]})`,
+                  },
+                ],
+              ];
+            }
+            if (value.length >= 2) {
+              return [
+                [
+                  `.${e(prefixNegativeModifiers('scale', modifier))}`,
+                  {
+                    transform: `scale(${value[0]}, ${value[1]})`,
+                  },
+                ],
+              ];
+            }
+            value = value[0];
+          }
           return [
             [
               `.${e(prefixNegativeModifiers('scale', modifier))}`,
@@ -158,6 +210,22 @@ module.exports = function(options = {}) {
     const rotateUtilities = _.fromPairs(
       _.concat(
         ..._.map(rotateTheme, (value, modifier) => {
+          if (_.isArray(value)) {
+            if (value.length === 0) {
+              return [];
+            }
+            if (value.length >= 4) {
+              return [
+                [
+                  `.${e(prefixNegativeModifiers('rotate', modifier))}`,
+                  {
+                    transform: `rotate3d(${value[0]}, ${value[1]}, ${value[2]}, ${value[3]})`,
+                  },
+                ],
+              ];
+            }
+            value = value[0];
+          }
           return [
             [
               `.${e(prefixNegativeModifiers('rotate', modifier))}`,

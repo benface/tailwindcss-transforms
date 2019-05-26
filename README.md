@@ -28,17 +28,23 @@ npm install tailwindcss-transforms
     translate: { // defaults to {}
       '1/2': '50%',
       'full': '100%',
+      'right-up': ['100%', '-100%'],
+      '3d': ['40px', '-60px', '-130px'],
     },
     scale: { // defaults to {}
       '90': '0.9',
       '100': '1',
       '110': '1.1',
       '-100': '-1',
+      'stretched-x': ['2', '0.5'],
+      'stretched-y': ['0.5', '2'],
+      '3d': ['0.5', '1', '2'],
     },
     rotate: { // defaults to {}
       '90': '90deg',
       '180': '180deg',
       '270': '270deg',
+      '3d': ['0', '1', '0.5', '45deg'],
     },
     skew: { // defaults to {}
       '-5': '-5deg',
@@ -102,18 +108,26 @@ This plugin generates the following utilities:
 .translate-y-[key] {
   transform: translateY([value]);
 }
-.translate-z-[key] { /* only if "3d" is true */
+.translate-z-[key] { /* only if the "3d" option is true */
   transform: translateZ([value]);
 }
-/* or, when the key starts with a minus sign: */
+/* when the key starts with a minus sign: */
 .-translate-x-[key] {
   transform: translateX([value]);
 }
 .-translate-y-[key] {
   transform: translateY([value]);
 }
-.-translate-z-[key] { /* only if "3d" is true */
+.-translate-z-[key] { /* only if the "3d" option is true */
   transform: translateZ([value]);
+}
+/* when the value is an array with two values: */
+.translate-[key] {
+  transform: translate([value-1], [value-2]);
+}
+/* when the value is an array with three values: */
+.translate-[key] {
+  transform: translate3d([value-1], [value-2], [value-3]);
 }
 
 /* configurable with the "scale" theme object */
@@ -126,10 +140,10 @@ This plugin generates the following utilities:
 .scale-y-[key] {
   transform: scaleY([value]);
 }
-.scale-z-[key] { /* only if "3d" is true */
+.scale-z-[key] { /* only if the "3d" option is true */
   transform: scaleZ([value]);
 }
-/* or, when the key starts with a minus sign: */
+/* when the key starts with a minus sign: */
 .-scale-[key] {
   transform: scale([value]);
 }
@@ -139,29 +153,41 @@ This plugin generates the following utilities:
 .-scale-y-[key] {
   transform: scaleY([value]);
 }
-.-scale-z-[key] { /* only if "3d" is true */
+.-scale-z-[key] { /* only if the "3d" option is true */
   transform: scaleZ([value]);
+}
+/* when the value is an array with two values: */
+.scale-[key] {
+  transform: scale([value-1], [value-2]);
+}
+/* when the value is an array with three values: */
+.scale-[key] {
+  transform: scale3d([value-1], [value-2], [value-3]);
 }
 
 /* configurable with the "rotate" theme object */
 .rotate-[key] {
   transform: rotate([value]);
 }
-.rotate-x-[key] { /* only if "3d" is true */
+.rotate-x-[key] { /* only if the "3d" option is true */
   transform: rotateX([value]);
 }
-.rotate-y-[key] { /* only if "3d" is true */
+.rotate-y-[key] { /* only if the "3d" option is true */
   transform: rotateY([value]);
 }
-/* or, when the key starts with a minus sign: */
+/* when the key starts with a minus sign: */
 .-rotate-[key] {
   transform: rotate([value]);
 }
-.-rotate-x-[key] { /* only if "3d" is true */
+.-rotate-x-[key] { /* only if the "3d" option is true */
   transform: rotateX([value]);
 }
-.-rotate-y-[key] { /* only if "3d" is true */
+.-rotate-y-[key] { /* only if the "3d" option is true */
   transform: rotateY([value]);
+}
+/* when the value is an array: */
+.rotate-[key] {
+  transform: rotate3d([value-1], [value-2], [value-3], [value-4]);
 }
 
 /* configurable with the "skew" theme object */
@@ -171,7 +197,7 @@ This plugin generates the following utilities:
 .skew-y-[key] {
   transform: skewY([value]);
 }
-/* or, when the key starts with a minus sign: */
+/* when the key starts with a minus sign: */
 .-skew-x-[key] {
   transform: skewX([value]);
 }
@@ -179,12 +205,12 @@ This plugin generates the following utilities:
   transform: skewY([value]);
 }
 
-/* configurable with the "perspective" theme object (only if "3d" is true) */
+/* configurable with the "perspective" theme object (only if the "3d" option is true) */
 .perspective-[key] {
   perspective: [value]
 }
 
-/* configurable with the "perspectiveOrigin" theme object (only if "3d" is true) */
+/* configurable with the "perspectiveOrigin" theme object (only if the "3d" option is true) */
 .perspective-[key] {
   perspective-origin: [value]
 }
