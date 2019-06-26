@@ -296,19 +296,19 @@ module.exports = function(options = {}) {
     );
 
     const transformStyleUtilities = {
-      'transform-flat': {
+      '.transform-flat': {
         transformStyle: 'flat',
       },
-      'transform-preserve-3d': {
+      '.transform-preserve-3d': {
         transformStyle: 'preserve-3d',
       },
     };
 
     const backfaceVisibilityUtilities = {
-      'backface-visible': {
+      '.backface-visible': {
         backfaceVisibility: 'visible',
       },
-      'backface-hidden': {
+      '.backface-hidden': {
         backfaceVisibility: 'hidden',
       },
     };
