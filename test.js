@@ -440,16 +440,16 @@ test('third-axis translate, scale, and rotate utilities can be generated', () =>
       .perspective-t {
         perspective-origin: top
       }
-      transform-flat {
+      .transform-flat {
         transform-style: flat
       }
-      transform-preserve-3d {
+      .transform-preserve-3d {
         transform-style: preserve-3d
       }
-      backface-visible {
+      .backface-visible {
         backface-visibility: visible
       }
-      backface-hidden {
+      .backface-hidden {
         backface-visibility: hidden
       }
     `);
