@@ -49,6 +49,7 @@ module.exports = function(options = {}) {
     const defaultPerspectiveOriginVariants = ['responsive'];
     const defaultTransformStyleVariants = ['responsive'];
     const defaultBackfaceVisibilityVariants = ['responsive'];
+    const defaultTransformBoxVariants = ['responsive'];
 
     const transformTheme = theme('transform', defaultTransformTheme);
     const transformVariants = variants('transform', defaultTransformVariants);
@@ -68,6 +69,7 @@ module.exports = function(options = {}) {
     const perspectiveOriginVariants = variants('perspectiveOrigin', defaultPerspectiveOriginVariants);
     const transformStyleVariants = variants('transformStyle', defaultTransformStyleVariants);
     const backfaceVisibilityVariants = variants('backfaceVisibility', defaultBackfaceVisibilityVariants);
+    const transformBoxVariants = variants('transformBox', defaultTransformBoxVariants);
 
     const transformUtilities = _.fromPairs(
       _.map(transformTheme, (value, modifier) => {
@@ -313,6 +315,18 @@ module.exports = function(options = {}) {
       },
     };
 
+    const transformBoxUtilities = {
+      '.transform-border': {
+        transformBox: 'border-box',
+      },
+      '.transform-fill': {
+        transformBox: 'fill-box',
+      },
+      '.transform-view': {
+        transformBox: 'view-box',
+      },
+    };
+
     addUtilities(transformUtilities, transformVariants);
     addUtilities(transformOriginUtilities, transformOriginVariants);
     addUtilities(translateUtilities, translateVariants);
@@ -325,5 +339,6 @@ module.exports = function(options = {}) {
       addUtilities(transformStyleUtilities, transformStyleVariants);
       addUtilities(backfaceVisibilityUtilities, backfaceVisibilityVariants);
     }
+    addUtilities(transformBoxUtilities, transformBoxVariants);
   };
 };

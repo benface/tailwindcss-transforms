@@ -79,6 +79,7 @@ npm install tailwindcss-transforms
     perspectiveOrigin: ['responsive'],
     transformStyle: ['responsive'],
     backfaceVisibility: ['responsive'],
+    transformBox: ['responsive'],
   },
   plugins: [
     require('tailwindcss-transforms')({
@@ -227,5 +228,16 @@ This plugin generates the following utilities:
 }
 .backface-hidden {
   backface-visibility: hidden;
+}
+
+/* not configurable (except for variants) */
+.transform-border {
+  transform-box: border-box;
+}
+.transform-fill {
+  transform-box: fill-box;
+}
+.transform-view {
+  transform-box: view-box;
 }
 ```

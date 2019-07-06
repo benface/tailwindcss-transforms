@@ -62,6 +62,15 @@ test('the plugin generates some utilities and responsive variants by default', (
       .transform-tl {
         transform-origin: top left;
       }
+      .transform-border {
+        transform-box: border-box;
+      }
+      .transform-fill {
+        transform-box: fill-box;
+      }
+      .transform-view {
+        transform-box: view-box;
+      }
       @media (min-width: 640px) {
         .sm\\:transform-none {
           transform: none;
@@ -89,6 +98,15 @@ test('the plugin generates some utilities and responsive variants by default', (
         }
         .sm\\:transform-tl {
           transform-origin: top left;
+        }
+        .sm\\:transform-border {
+          transform-box: border-box;
+        }
+        .sm\\:transform-fill {
+          transform-box: fill-box;
+        }
+        .sm\\:transform-view {
+          transform-box: view-box;
         }
       }
     `);
@@ -143,6 +161,7 @@ test('utilities can be customized', () => {
       perspectiveOrigin: [],
       transformStyle: [],
       backfaceVisibility: [],
+      transformBox: [],
     },
   }).then(css => {
     expect(css).toMatchCss(`
@@ -218,6 +237,15 @@ test('utilities can be customized', () => {
       .skew-y-5 {
         transform: skewY(5deg);
       }
+      .transform-border {
+        transform-box: border-box;
+      }
+      .transform-fill {
+        transform-box: fill-box;
+      }
+      .transform-view {
+        transform-box: view-box;
+      }
     `);
   });
 });
@@ -250,6 +278,7 @@ test('negative translate, scale, rotate, and skew utilities can be generated', (
       scale: [],
       rotate: [],
       skew: [],
+      transformBox: [],
     },
   }).then(css => {
     expect(css).toMatchCss(`
@@ -304,6 +333,15 @@ test('negative translate, scale, rotate, and skew utilities can be generated', (
       .-skew-y-5 {
         transform: skewY(-5deg);
       }
+      .transform-border {
+        transform-box: border-box;
+      }
+      .transform-fill {
+        transform-box: fill-box;
+      }
+      .transform-view {
+        transform-box: view-box;
+      }
     `);
   });
 });
@@ -351,6 +389,7 @@ test('third-axis translate, scale, and rotate utilities can be generated', () =>
       perspectiveOrigin: [],
       transformStyle: [],
       backfaceVisibility: [],
+      transformBox: [],
     },
   }, {
     '3d': true,
@@ -452,6 +491,15 @@ test('third-axis translate, scale, and rotate utilities can be generated', () =>
       .backface-hidden {
         backface-visibility: hidden;
       }
+      .transform-border {
+        transform-box: border-box;
+      }
+      .transform-fill {
+        transform-box: fill-box;
+      }
+      .transform-view {
+        transform-box: view-box;
+      }
     `);
   });
 });
@@ -486,6 +534,7 @@ test('multi-axis translate, scale, and rotate utilities can be generated', () =>
       scale: [],
       rotate: [],
       skew: [],
+      transformBox: [],
     },
   }).then(css => {
     expect(css).toMatchCss(`
@@ -546,6 +595,15 @@ test('multi-axis translate, scale, and rotate utilities can be generated', () =>
       .rotate-3d {
         transform: rotate3d(0, 1, 0.5, 45deg);
       }
+      .transform-border {
+        transform-box: border-box;
+      }
+      .transform-fill {
+        transform-box: fill-box;
+      }
+      .transform-view {
+        transform-box: view-box;
+      }
     `);
   });
 });
@@ -587,6 +645,7 @@ test('variants can be customized', () => {
       perspectiveOrigin: ['hover', 'active'],
       transformStyle: ['hover'],
       backfaceVisibility: ['active'],
+      transformBox: [],
     },
   }).then(css => {
     expect(css).toMatchCss(`
@@ -631,6 +690,15 @@ test('variants can be customized', () => {
       }
       .skew-y-5 {
         transform: skewY(5deg);
+      }
+      .transform-border {
+        transform-box: border-box;
+      }
+      .transform-fill {
+        transform-box: fill-box;
+      }
+      .transform-view {
+        transform-box: view-box;
       }
     `);
   });
