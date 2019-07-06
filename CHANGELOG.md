@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project mostly adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2019-07-05
+
+### Added
+- Added `transform-box` utilities (`transform-border`, `transform-fill`, and `transform-view`)
+
+### Fixed
+- Fixed the `transform-style` and `backface-visibility` utility class selectors (thanks, [@slavanossar](https://github.com/slavanossar)!)
+
 ## [2.1.0] - 2019-05-26
 
 ### Added
@@ -66,7 +74,8 @@ and this project mostly adheres to [Semantic Versioning](https://semver.org/spec
 
 Initial release
 
-[Unreleased]: https://github.com/benface/tailwindcss-transforms/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/benface/tailwindcss-transforms/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/benface/tailwindcss-transforms/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/benface/tailwindcss-transforms/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/benface/tailwindcss-transforms/compare/v2.0.0-beta.1...v2.0.0
 [2.0.0-beta.1]: https://github.com/benface/tailwindcss-transforms/compare/v1.0.2...v2.0.0-beta.1
