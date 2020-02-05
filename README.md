@@ -1,3 +1,7 @@
+# ⛔️ DEPRECATED
+
+Tailwind CSS 1.2 (released in February 2020) has utilities for [scale](https://tailwindcss.com/docs/scale), [rotate](https://tailwindcss.com/docs/rotate), [translate](https://tailwindcss.com/docs/translate), [skew](https://tailwindcss.com/docs/skew), and [transform origin](https://tailwindcss.com/docs/transform-origin), and contrary to this plugin, they are fully composable (e.g. a single element can have more than one transform type). It doesn’t have 3D transforms (`translateZ`, `translate3d`, `scaleZ`, `scale3d`, `rotateX`, `rotateY`, `rotate3d`, `perspective`, `transform-style`, and `backface-visibility`) but those are not very common and can be added to projects manually on a case-by-case basis.
+
 # Transforms Plugin for Tailwind CSS
 
 ## Installation
@@ -10,7 +14,7 @@ npm install tailwindcss-transforms
 
 ```js
 // tailwind.config.js
-{
+module.exports = {
   theme: {
     transform: { // defaults to this value
       'none': 'none',
@@ -86,7 +90,7 @@ npm install tailwindcss-transforms
       '3d': false, // defaults to false
     }),
   ],
-}
+};
 ```
 
 This plugin generates the following utilities:
